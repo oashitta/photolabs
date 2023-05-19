@@ -13,9 +13,9 @@ const TopicListItem = (props) => {
   );
 };
 
-TopicListItem.defaultProps = {
-  id: 1,
-  label: "Nature",
-  link: "link placeholder",
-};
+// TopicListItem.defaultProps = {
+//   id: 1,
+//   label: "Nature",
+//   link: "link placeholder",
+// };
 export default TopicListItem;
