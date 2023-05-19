@@ -14,11 +14,7 @@ const PhotoListItem = (props) => {
         alt={`Photo by ${username}`}
         className="photo-list--image"
       />
-      {!hideUserName && (
-        <p className="photo-list--user-profile photo-list--user-info">
-          {username}
-        </p>
-      )}
+      {!hideUserName && <p>{username}</p>}
     </div>
   );
 };
