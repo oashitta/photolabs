@@ -3,7 +3,8 @@ import React, { useCallback, useState } from "react";
 import { FavIcon } from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 
-function PhotoFavButton() {
+function PhotoFavButton(props) {
+  const { onFavorited } = props;
   // declaring the states.
   const [filled, setFilled] = useState(false);
 
@@ -11,7 +12,15 @@ function PhotoFavButton() {
     console.log("fav icon was clicked");
     // setting the value of filled to true on click of the FavIcon.
     // using (preFilled) => !preFilled helps to toggle between clicked state and unclicked state.
-    setFilled((prevFilled) => !prevFilled);
+    setFilled((prevFilled) => {
+      if (prevFilled === true) {
+        onFavorited(false);
+        return false;
+      } else if (prevFilled === false) {
+        onFavorited(true);
+        return true;
+      }
+    });
   };
 
   return (

@@ -7,14 +7,21 @@ import PhotoListItem from "./PhotoListItem";
 //   <PhotoListItem key={photo.id} />
 // ))}
 const PhotoList = (props) => {
-  console.log("this is props.photos:", props.photos);
-  const photoItems = props.photos.map((photo) => {
+  // console.log("this is props.photos:", props.photos);
+  const { photos, addFavPhoto, removeFavPhoto } = props;
+
+  const photoItems = photos.map((photo, index) => {
+    // const isFavorite = favPhotos.includes(photo.id);
+
     return (
       <PhotoListItem
-        key={photo.id}
+        key={`${photo.id}_${index}`}
         username={photo.user.username}
         imageSource={photo.urls.regular}
         hideUsername={photo.hideUsername}
+        addFavPhoto={addFavPhoto}
+        removeFavPhoto={removeFavPhoto}
+        id={photo.id}
       />
     );
   });

@@ -4,10 +4,10 @@ import "../styles/TopicList.scss";
 // import topics from "../mocks/topics.json";
 
 const TopicList = (props) => {
-  const topicItems = props.topics.map((topic) => {
+  const topicItems = props.topics.map((topic, index) => {
     return (
       <TopicListItem
-        key={topic.id}
+        key={`${topic.id}_${index}`}
         label={topic.title}
         link={topic.link}
         className="topic-list--item"
