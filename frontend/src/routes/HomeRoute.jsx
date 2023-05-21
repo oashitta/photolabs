@@ -31,17 +31,6 @@ const HomeRoute = (props) => {
   // console.log("has favorited photo", hasFavoritedPhoto);
   console.log("has favorited photo", favPhotos);
 
-  // opening modal
-  // const { selectedPhoto, setSelectedPhoto } = useState(null);
-
-  // const openModal = (photo) => {
-  //   setSelectedPhoto(photo);
-  // };
-
-  // const closeModal = () => {
-  //   setSelectedPhoto(null);
-  // };
-
   return (
     <div className="home-route">
       <TopNavigationBar topics={topics} hasFavoritedPhoto={favPhotos.length} />
