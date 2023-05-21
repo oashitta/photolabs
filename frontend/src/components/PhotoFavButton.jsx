@@ -9,7 +9,7 @@ function PhotoFavButton(props) {
   const [filled, setFilled] = useState(false);
 
   const handleFavClick = () => {
-    console.log("fav icon was clicked");
+    // console.log("fav icon was clicked");
     // setting the value of filled to true on click of the FavIcon.
     // using (preFilled) => !preFilled helps to toggle between clicked state and unclicked state.
     setFilled((prevFilled) => {

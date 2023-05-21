@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
@@ -21,11 +21,19 @@ const PhotoListItem = (props) => {
     setIsFavorited(favorited);
   };
 
-  if (isFavorited === true) {
-    addFavPhoto(id);
-  } else {
-    removeFavPhoto(id);
-  }
+  useEffect(() => {
+    if (isFavorited) {
+      addFavPhoto(id);
+    } else {
+      removeFavPhoto(id);
+    }
+  }, [isFavorited]);
+
+  // if (isFavorited === true) {
+  //   addFavPhoto(id);
+  // } else {
+  //   removeFavPhoto(id);
+  // }
 
   return (
     <div className="photo-list--item">
