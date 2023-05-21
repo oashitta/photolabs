@@ -7,10 +7,12 @@ const PhotoListItem = (props) => {
   const {
     username,
     imageSource,
+    description,
     id,
-    hideUserName,
+    hideUsername,
     addFavPhoto,
     removeFavPhoto,
+    onPhotoClick,
   } = props;
 
   const [isFavorited, setIsFavorited] = useState(false);
@@ -32,17 +34,11 @@ const PhotoListItem = (props) => {
         src={imageSource}
         alt={`Photo by ${username}`}
         className="photo-list--image"
+        onClick={onPhotoClick}
       />
-      {!hideUserName && <p>{username}</p>}
+      {!hideUsername && <p>{username}</p>}
     </div>
   );
 };
-
-// PhotoListItem.defaultProps = {
-//   username: "Jacob",
-//   imageSource: `${process.env.PUBLIC_URL}/Image.jpg`,
-//   id: 1,
-//   hideUserName: false,
-// };
 
 export default PhotoListItem;

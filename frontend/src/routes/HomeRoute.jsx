@@ -6,19 +6,12 @@ import PhotoList from "../components/PhotoList";
 
 // takes props from App.jsx
 const HomeRoute = (props) => {
-  const { topics, photos } = props;
+  const { topics, photos, onPhotoClick } = props;
 
   // state to keep track of the details of the photos favorited.
-  // const [hasFavoritedPhoto, setHasFavoritedPhoto] = useState(false);
   const [favPhotos, setFavPhotos] = useState([]);
 
-  // goal of this is to call has setfav to true on click
-  // const onFavoritedPhoto = function () {
-  //   console.log("favorited was clicked");
-  //   setHasFavoritedPhoto(true);
-  // };
-
-  //current state of favorite photos
+  // goal of this is to call has setfavphoto to true on click
   // if favePhotos does not include the id. add it.
   const addFavPhoto = (photoId) => {
     // do I need to make a copy of the existing aray first?
@@ -38,6 +31,17 @@ const HomeRoute = (props) => {
   // console.log("has favorited photo", hasFavoritedPhoto);
   console.log("has favorited photo", favPhotos);
 
+  // opening modal
+  // const { selectedPhoto, setSelectedPhoto } = useState(null);
+
+  // const openModal = (photo) => {
+  //   setSelectedPhoto(photo);
+  // };
+
+  // const closeModal = () => {
+  //   setSelectedPhoto(null);
+  // };
+
   return (
     <div className="home-route">
       <TopNavigationBar topics={topics} hasFavoritedPhoto={favPhotos.length} />
@@ -45,6 +49,7 @@ const HomeRoute = (props) => {
         photos={photos}
         addFavPhoto={addFavPhoto}
         removeFavPhoto={removeFavPhoto}
+        onPhotoClick={onPhotoClick}
       />
     </div>
   );
