@@ -1,18 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
 const PhotoList = (props) => {
   // console.log("this is props.photos:", props.photos);
-  const {
-    photos,
-    addFavPhoto,
-    removeFavPhoto,
-    onPhotoClick,
-    toggleFavorite,
-    favPhotos,
-  } = props;
+  const { photos, onPhotoClick, toggleFavorite, favPhotos } = props;
 
   const photoItems = photos.map((photo, index) => {
     return (
@@ -20,8 +13,11 @@ const PhotoList = (props) => {
         key={`${photo.id}_${index}`}
         photo={photo}
         username={photo.user.username}
+        profile={photo.user.profile}
         imageSource={photo.urls.regular}
         hideUsername={photo.hideUsername}
+        city={photo.location.city}
+        country={photo.location.country}
         toggleFavorite={toggleFavorite}
         favorited={favPhotos.includes(photo.id)}
         id={photo.id}

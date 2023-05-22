@@ -8,7 +8,7 @@ export const PhotoDetailsModal = (props) => {
   const { onClose, photo, photos, toggleFavorite, favorited, favPhotos } =
     props;
 
-  const { imageSource, description, username, id } = photo;
+  const { imageSource, description, username, id, city, country } = photo;
 
   return (
     <div className="photo-details-modal">
@@ -41,25 +41,32 @@ export const PhotoDetailsModal = (props) => {
           </defs>
         </svg>
       </button>
-      <PhotoFavButton
-        filled={favorited}
-        toggleFavorite={() => toggleFavorite(id)}
-      />
-      <img
-        className="photo-details-modal--image"
-        src={imageSource}
-        alt={description}
-      />
-      <h3>photo by {username}</h3>
-      {/* <h3>{description}</h3> */}
-
-      <h4 className="photo-details-modal--header">Similar Photos</h4>
-      <div className="photo-details-modal--images">
-        <PhotoList
-          photos={[photos[0], photos[1], photos[3], photos[4]]}
-          toggleFavorite={toggleFavorite}
-          favPhotos={favPhotos}
+      <div className="photo-details-modal--selectedImage">
+        <PhotoFavButton
+          filled={favorited}
+          toggleFavorite={() => toggleFavorite(id)}
         />
+        <img
+          className="photo-details-modal--image"
+          src={imageSource}
+          alt={description}
+        />
+        <h3>photo by {username}</h3>
+        <p className="photo-list--user-location ">
+          {city}, {country}
+        </p>
+      </div>
+
+      {/* <h3>{description}</h3> */}
+      <div>
+        <h4 className="photo-details-modal--header">Similar Photos</h4>
+        <div className="photo-details-modal--images">
+          <PhotoList
+            photos={[photos[0], photos[1], photos[3], photos[4]]}
+            toggleFavorite={toggleFavorite}
+            favPhotos={favPhotos}
+          />
+        </div>
       </div>
     </div>
   );

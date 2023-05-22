@@ -9,31 +9,14 @@ const PhotoListItem = (props) => {
     imageSource,
     description,
     id,
+    profile,
     hideUsername,
     toggleFavorite,
     favorited,
     onPhotoClick,
+    city,
+    country,
   } = props;
-
-  // const [isFavorited, setIsFavorited] = useState(false);
-
-  // const onFavorited = (favorited) => {
-  //   setIsFavorited(favorited);
-  // };
-
-  // useEffect(() => {
-  //   if (isFavorited) {
-  //     addFavPhoto(id);
-  //   } else {
-  //     removeFavPhoto(id);
-  //   }
-  // }, [isFavorited]);
-
-  // if (isFavorited === true) {
-  //   addFavPhoto(id);
-  // } else {
-  //   removeFavPhoto(id);
-  // }
 
   return (
     <div className="photo-list--item">
@@ -47,11 +30,20 @@ const PhotoListItem = (props) => {
         className="photo-list--image"
         onClick={() => onPhotoClick(props)}
       />
-      {!hideUsername && (
-        <p className="photo-list--user-profile photo-list--user-info">
-          {username}
-        </p>
-      )}
+      <div className="photo-list-details--parent">
+        <img
+          src={profile}
+          className="photo-list--user-profile"
+          alt="user-photo"
+        />
+        <div>
+          <p className="photo-list--user-info"> {username} </p>
+          <p className="photo-list--user-location ">
+            {city}, {country}
+          </p>
+        </div>
+      </div>
+      {/* {!hideUsername && <p className="photo-list--user-info">{username}</p>} */}
     </div>
   );
 };
