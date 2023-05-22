@@ -10,24 +10,24 @@ const PhotoListItem = (props) => {
     description,
     id,
     hideUsername,
-    addFavPhoto,
-    removeFavPhoto,
+    toggleFavorite,
+    favorited,
     onPhotoClick,
   } = props;
 
-  const [isFavorited, setIsFavorited] = useState(false);
+  // const [isFavorited, setIsFavorited] = useState(false);
 
-  const onFavorited = (favorited) => {
-    setIsFavorited(favorited);
-  };
+  // const onFavorited = (favorited) => {
+  //   setIsFavorited(favorited);
+  // };
 
-  useEffect(() => {
-    if (isFavorited) {
-      addFavPhoto(id);
-    } else {
-      removeFavPhoto(id);
-    }
-  }, [isFavorited]);
+  // useEffect(() => {
+  //   if (isFavorited) {
+  //     addFavPhoto(id);
+  //   } else {
+  //     removeFavPhoto(id);
+  //   }
+  // }, [isFavorited]);
 
   // if (isFavorited === true) {
   //   addFavPhoto(id);
@@ -37,7 +37,10 @@ const PhotoListItem = (props) => {
 
   return (
     <div className="photo-list--item">
-      <PhotoFavButton onFavorited={onFavorited} />
+      <PhotoFavButton
+        filled={favorited}
+        toggleFavorite={() => toggleFavorite(id)}
+      />
       <img
         src={imageSource}
         alt={description}

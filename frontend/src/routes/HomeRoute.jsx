@@ -17,10 +17,8 @@ const HomeRoute = (props) => {
   // goal of this is to call has setfavphoto to true on click
   // if favePhotos does not include the id. add it.
   const addFavPhoto = (photoId) => {
-    // do I need to make a copy of the existing aray first?
-    // setFavPhotos((prevFavPhotos) => {})
     if (!favPhotos.includes(photoId)) {
-      setFavPhotos([...favPhotos, photoId]);
+      setFavPhotos((prev) => [...prev, photoId]);
     }
   };
 
@@ -28,6 +26,14 @@ const HomeRoute = (props) => {
   const removeFavPhoto = (photoId) => {
     if (favPhotos.includes(photoId)) {
       setFavPhotos(favPhotos.filter((id) => id !== photoId));
+    }
+  };
+
+  const toggleFavorite = (photoId) => {
+    if (favPhotos.includes(photoId)) {
+      setFavPhotos(favPhotos.filter((id) => id !== photoId));
+    } else {
+      setFavPhotos((prev) => [...prev, photoId]);
     }
   };
 
@@ -57,17 +63,18 @@ const HomeRoute = (props) => {
       <TopNavigationBar topics={topics} hasFavoritedPhoto={favPhotos.length} />
       <PhotoList
         photos={photos}
-        addFavPhoto={addFavPhoto}
-        removeFavPhoto={removeFavPhoto}
         onPhotoClick={photoClickHandler}
+        toggleFavorite={toggleFavorite}
+        favPhotos={favPhotos}
       />
       {openModal && (
         <PhotoDetailsModal
           photos={photos} //passing the list of all photos to the modal
           photo={clickedPhoto}
           onClose={closeModal}
-          addFavPhoto={addFavPhoto}
-          removeFavPhoto={removeFavPhoto}
+          toggleFavorite={toggleFavorite}
+          favorited={favPhotos.includes(clickedPhoto.id)}
+          favPhotos={favPhotos}
         />
       )}
     </div>

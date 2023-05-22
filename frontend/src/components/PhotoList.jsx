@@ -5,7 +5,14 @@ import PhotoListItem from "./PhotoListItem";
 
 const PhotoList = (props) => {
   // console.log("this is props.photos:", props.photos);
-  const { photos, addFavPhoto, removeFavPhoto, onPhotoClick } = props;
+  const {
+    photos,
+    addFavPhoto,
+    removeFavPhoto,
+    onPhotoClick,
+    toggleFavorite,
+    favPhotos,
+  } = props;
 
   const photoItems = photos.map((photo, index) => {
     return (
@@ -15,8 +22,8 @@ const PhotoList = (props) => {
         username={photo.user.username}
         imageSource={photo.urls.regular}
         hideUsername={photo.hideUsername}
-        addFavPhoto={addFavPhoto}
-        removeFavPhoto={removeFavPhoto}
+        toggleFavorite={toggleFavorite}
+        favorited={favPhotos.includes(photo.id)}
         id={photo.id}
         description={photo.description}
         onPhotoClick={onPhotoClick} // Pass the clicked photo to the onPhotoClick function. when i pass the photo, the modal opens and doesnt close.
