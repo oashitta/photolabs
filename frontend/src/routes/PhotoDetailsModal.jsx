@@ -1,9 +1,25 @@
 import React from "react";
 
 import "../styles/PhotoDetailsModal.scss";
+import PhotoList from "../components/PhotoList";
+import PhotoFavButton from "../components/PhotoFavButton";
+import PhotoListItem from "../components/PhotoListItem";
 
 export const PhotoDetailsModal = (props) => {
-  const { photo, onClose, imageSource, username, description } = props;
+  const { onClose, photo, photos, addFavPhoto, removeFavPhoto, onFavorited } =
+    props;
+
+  const { imageSource, description, username, id } = photo;
+  // console.log("this is imageSource in modal:", imageSource);
+  // console.log("this is description in modal:", description);
+
+  const handleFavClick = (favorited) => {
+    if (favorited) {
+      addFavPhoto(id);
+    } else {
+      removeFavPhoto(id);
+    }
+  };
 
   return (
     <div className="photo-details-modal">
@@ -36,12 +52,23 @@ export const PhotoDetailsModal = (props) => {
           </defs>
         </svg>
       </button>
+      <PhotoFavButton onFavorited={handleFavClick} />
       <img
+        className="photo-details-modal--image"
         src={imageSource}
         alt={description}
-        className="photo-details-modal--image"
       />
-      <h3>{description}</h3>
+      <h3>photo by {username}</h3>
+      {/* <h3>{description}</h3> */}
+
+      <h4 className="photo-details-modal--header">Similar Photos</h4>
+      <div className="photo-details-modal--images">
+        <PhotoList
+          photos={[photos[0], photos[1], photos[3], photos[4]]}
+          addFavPhoto={addFavPhoto}
+          removeFavPhoto={removeFavPhoto}
+        />
+      </div>
     </div>
   );
 };

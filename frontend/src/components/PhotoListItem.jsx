@@ -40,11 +40,15 @@ const PhotoListItem = (props) => {
       <PhotoFavButton onFavorited={onFavorited} />
       <img
         src={imageSource}
-        alt={`Photo by ${username}`}
+        alt={description}
         className="photo-list--image"
-        onClick={onPhotoClick}
+        onClick={() => onPhotoClick(props)}
       />
-      {!hideUsername && <p>{username}</p>}
+      {!hideUsername && (
+        <p className="photo-list--user-profile photo-list--user-info">
+          {username}
+        </p>
+      )}
     </div>
   );
 };
