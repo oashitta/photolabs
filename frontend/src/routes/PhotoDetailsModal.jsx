@@ -3,24 +3,12 @@ import React from "react";
 import "../styles/PhotoDetailsModal.scss";
 import PhotoList from "../components/PhotoList";
 import PhotoFavButton from "../components/PhotoFavButton";
-import PhotoListItem from "../components/PhotoListItem";
 
 export const PhotoDetailsModal = (props) => {
-  // addFavPhoto, removeFavPhoto,
   const { onClose, photo, photos, toggleFavorite, favorited, favPhotos } =
     props;
 
   const { imageSource, description, username, id } = photo;
-  // console.log("this is imageSource in modal:", imageSource);
-  // console.log("this is description in modal:", description);
-
-  // const handleFavClick = (favorited) => {
-  //   if (favorited) {
-  //     addFavPhoto(id);
-  //   } else {
-  //     removeFavPhoto(id);
-  //   }
-  // };
 
   return (
     <div className="photo-details-modal">

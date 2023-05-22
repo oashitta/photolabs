@@ -37,9 +37,6 @@ const HomeRoute = (props) => {
     }
   };
 
-  // console.log("has favorited photo", hasFavoritedPhoto);
-  // console.log("has favorited photo", favPhotos);
-
   // manages modals active state
   const [openModal, setOpenModal] = useState(false);
   // manages photodate that will bw passed to modal
