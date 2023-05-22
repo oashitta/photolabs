@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+#files
+separation_of_concerns.js
