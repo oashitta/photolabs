@@ -8,6 +8,9 @@ const cors = require("cors");
 
 const app = express();
 
+const db = require("./db"); // automatically requires index where the index file exists.
+// const db = require("./db/index");
+
 const photos = require("./routes/photos");
 const topics = require("./routes/topics");
 
@@ -16,7 +19,7 @@ function read(file) {
     fs.readFile(
       file,
       {
-        encoding: "utf-8"
+        encoding: "utf-8",
       },
       (error, data) => {
         if (error) return reject(error);
@@ -26,21 +29,21 @@ function read(file) {
   });
 }
 
-module.exports = function application(
-  ENV,
-) {
+module.exports = function application(ENV) {
   app.use(cors());
   app.use(helmet());
   app.use(bodyparser.json());
+  // to serve up static files, we need to use express middleware 'static' - static files are unchanging files, they dont change when the server is running.  e.g css
+  app.use(express.static(path.join(__dirname, "public")));
 
   // TODO: update to topics and photos
-  app.use("/api", photos());
-  app.use("/api", topics());
+  app.use("/api", photos(db));
+  app.use("/api", topics(db));
 
   if (ENV === "development" || ENV === "test") {
     Promise.all([
       read(path.resolve(__dirname, `db/schema/create.sql`)),
-      read(path.resolve(__dirname, `db/schema/${ENV}.sql`))
+      read(path.resolve(__dirname, `db/schema/${ENV}.sql`)),
     ])
       .then(([create, seed]) => {
         app.get("/api/debug/reset", (request, response) => {
@@ -52,12 +55,12 @@ module.exports = function application(
             });
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(`Error setting up the reset route: ${error}`);
       });
   }
 
-  app.close = function() {
+  app.close = function () {
     return db.end();
   };
 
