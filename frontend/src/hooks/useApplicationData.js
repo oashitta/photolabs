@@ -1,10 +1,12 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 // takes props from App.jsx
 
 const initialState = {
   favPhotos: [],
   openModal: false,
   clickedPhoto: null,
+  topic: undefined,
+  photos: [],
 };
 
 export const ACTIONS = {
@@ -12,10 +14,17 @@ export const ACTIONS = {
   CLOSE_MODAL: "CLOSE_MODAL",
   TOGGLE_FAVORITE: "TOGGLE_FAVORITE",
   CLICKED_PHOTO: "CLICKED_PHOTO",
+  PHOTOS_BY_TOPIC: "PHOTOS_BY_TOPIC",
+  SET_PHOTOS: "SET_PHOTOS",
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    case ACTIONS.SET_PHOTOS:
+      return {
+        ...state,
+        photos: action.payload,
+      };
     case ACTIONS.OPEN_MODAL:
       return { ...state, openModal: true, clickedPhoto: action.photoProps };
 
@@ -46,6 +55,12 @@ function reducer(state, action) {
         ...state,
         clickedPhoto: action.photoProps,
       };
+
+    case ACTIONS.PHOTOS_BY_TOPIC:
+      return {
+        ...state,
+        topic: action.payload,
+      };
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -55,6 +70,13 @@ function reducer(state, action) {
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  useEffect(() => {
+    fetch("http://localhost:8001/api/photos")
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_PHOTOS, payload: [...data] });
+      });
+  }, []);
 
   const toggleFavorite = (photoId) => {
     dispatch({ type: ACTIONS.TOGGLE_FAVORITE, payload: { photoId } });
@@ -73,6 +95,14 @@ const useApplicationData = () => {
     openModal(photoProps);
   };
 
+  const getPhotosByTopic = (topicId) => {
+    fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: ACTIONS.SET_PHOTOS, payload: [...data] });
+      });
+  };
+
   return {
     favPhotos: state.favPhotos,
     toggleFavorite,
@@ -80,6 +110,8 @@ const useApplicationData = () => {
     photoClickHandler,
     clickedPhoto: state.clickedPhoto,
     closeModal,
+    getPhotosByTopic,
+    photos: state.photos,
   };
 };
 

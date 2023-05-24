@@ -3,6 +3,8 @@ import TopicListItem from "./TopicListItem";
 import "../styles/TopicList.scss";
 
 const TopicList = (props) => {
+  const { getPhotosByTopic } = props;
+
   const topicItems = props.topics.map((topic, index) => {
     return (
       <TopicListItem
@@ -10,6 +12,7 @@ const TopicList = (props) => {
         label={topic.title}
         link={topic.link}
         className="topic-list--item"
+        onClick={() => getPhotosByTopic(topic.id)}
       />
     );
   });

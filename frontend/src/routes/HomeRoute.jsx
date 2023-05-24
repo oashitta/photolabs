@@ -4,6 +4,7 @@ import TopNavigationBar from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
 import PhotoDetailsModal from "./PhotoDetailsModal";
 import PhotoFavButton from "../components/PhotoFavButton";
+import useApplicationData from "../hooks/useApplicationData";
 
 // takes props from App.jsx
 const HomeRoute = (props) => {
@@ -16,11 +17,16 @@ const HomeRoute = (props) => {
     openModal,
     clickedPhoto,
     onPhotoClick,
+    getPhotosByTopic,
   } = props;
 
   return (
     <div className="home-route">
-      <TopNavigationBar topics={topics} hasFavoritedPhoto={favPhotos.length} />
+      <TopNavigationBar
+        topics={topics}
+        hasFavoritedPhoto={favPhotos.length}
+        getPhotosByTopic={getPhotosByTopic}
+      />
       <PhotoList
         photos={photos}
         // onPhotoClick={photoClickHandler}

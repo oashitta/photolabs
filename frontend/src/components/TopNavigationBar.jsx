@@ -5,14 +5,19 @@ import FavBadge from "./FavBadge";
 import "../styles/TopNavigationBar.scss";
 
 const TopNavigation = (props) => {
-  const { hasFavoritedPhoto } = props;
+  const { hasFavoritedPhoto, topics, getPhotosByTopic, photos } = props;
 
-  // console.log("this is topics:", props.topics);
+  const refreshPage = function () {
+    window.location.reload();
+  };
+
   return (
     <div className="top-nav-bar">
-      <span className="top-nav-bar--logo">PhotoLabs</span>
+      <span className="top-nav-bar--logo" onClick={refreshPage}>
+        PhotoLabs
+      </span>
 
-      <TopicList topics={props.topics} />
+      <TopicList topics={topics} getPhotosByTopic={getPhotosByTopic} />
       <FavBadge isFavPhotoExist={hasFavoritedPhoto} />
     </div>
   );
