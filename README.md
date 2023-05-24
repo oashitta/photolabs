@@ -10,8 +10,8 @@ The project uses several aspects of react such as components, useEffect, useStat
 
 ## App Interface
 
-!["screenshot of homepage"]()
-!["screenshot of modal"]()
+!["screenshot of homepage"](https://github.com/oashitta/photolabs/blob/main/docs/homepage.png?raw=true)
+!["screenshot of modal"](https://github.com/oashitta/photolabs/blob/main/docs/modal.png?raw=true)
 
 ## Using the App & Featured
 
