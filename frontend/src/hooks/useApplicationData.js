@@ -1,6 +1,7 @@
 import { useReducer, useEffect } from "react";
 // takes props from App.jsx
 
+// declaring the initial states of the cases
 const initialState = {
   favPhotos: [],
   openModal: false,
@@ -10,6 +11,7 @@ const initialState = {
   topics: [],
 };
 
+// declaring actions
 export const ACTIONS = {
   OPEN_MODAL: "OPEN_MODAL",
   CLOSE_MODAL: "CLOSE_MODAL",
@@ -75,8 +77,11 @@ function reducer(state, action) {
   }
 }
 
+//Creating an effect to make a GET request to /api/photos and /api/topics using fetch and updating the photos and topics state with the response. No longer using hard coded data to render photos and topics.
+
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   useEffect(() => {
     fetch("http://localhost:8001/api/photos")
       .then((res) => res.json())
@@ -94,6 +99,7 @@ const useApplicationData = () => {
       });
   }, []);
 
+  // toggling between like and unlike state.
   const toggleFavorite = (photoId) => {
     dispatch({ type: ACTIONS.TOGGLE_FAVORITE, payload: { photoId } });
   };
@@ -102,15 +108,18 @@ const useApplicationData = () => {
     dispatch({ type: ACTIONS.OPEN_MODAL, photoProps });
   };
 
+  // To close the modal
   const closeModal = () => {
     dispatch({ type: ACTIONS.CLOSE_MODAL });
   };
+
   // to open the modal
   const photoClickHandler = (photoProps) => {
     dispatch({ type: ACTIONS.CLICKED_PHOTO, photoProps });
     openModal(photoProps);
   };
 
+  // to get photo collection by topic id.
   const getPhotosByTopic = (topicId) => {
     fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
       .then((res) => res.json())
