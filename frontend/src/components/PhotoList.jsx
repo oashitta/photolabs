@@ -4,7 +4,6 @@ import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
 
 const PhotoList = (props) => {
-  // console.log("this is props.photos:", props.photos);
   const { photos, onPhotoClick, toggleFavorite, favPhotos } = props;
 
   const photoItems = photos.map((photo, index) => {
