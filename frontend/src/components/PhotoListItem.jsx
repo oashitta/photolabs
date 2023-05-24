@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
@@ -10,7 +10,7 @@ const PhotoListItem = (props) => {
     description,
     id,
     profile,
-    hideUsername,
+    // hideUsername,
     toggleFavorite,
     favorited,
     onPhotoClick,

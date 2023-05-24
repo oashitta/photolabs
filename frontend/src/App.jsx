@@ -15,11 +15,12 @@ const App = (props) => {
     closeModal,
     getPhotosByTopic,
     photos,
+    topics,
   } = useApplicationData();
 
   // photo and topics data now come from the appplication and the state is being tracked using the useStateHook.
   // const [photos, setPhotos] = useState([]);
-  const [topics, setTopics] = useState([]);
+  // const [topics, setTopics] = useState([]);
 
   //Creating an effect to make a GET request to /api/photos and /api/topics using fetch and updating the photos and topics state with the response. No longer using hard coded data to render photos and topics.
   // useEffect(() => {
@@ -30,13 +31,13 @@ const App = (props) => {
   //     });
   // }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:8001/api/topics")
-      .then((res) => res.json())
-      .then((data) => {
-        setTopics([...data]);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:8001/api/topics")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setTopics([...data]);
+  //     });
+  // }, []);
 
   // const getPhotosByTopic = (topic_id) => {
   //   fetch(`http://localhost:8001/api/topics/photos/:${topic_id}`)

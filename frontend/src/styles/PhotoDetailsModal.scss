@@ -9,6 +9,8 @@
   width: 55%;
   overflow-y: scroll;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .photo-details-modal--close-button {
@@ -22,6 +24,7 @@
   cursor: pointer;
   margin-left: 16px;
   margin-top: 16px;
+  align-self: flex-start;
 }
 
 .photo-details-modal--images {
@@ -29,22 +32,16 @@
   margin-top: 8px;
 }
 
-.photo-details-modal--selectedImage {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-
-  h3 {
-    margin-left: 60px;
-  }
+.center-modal-image {
+  align-self: center;
 }
 
 h4 {
-  margin-left: 60px;
+  margin-left: 10px;
 }
 .photo-details-modal--image {
   align-items: center;
-  max-width: 90%;
+  max-width: 100%;
   border-radius: 8px;
   margin: auto;
 }
@@ -70,4 +67,5 @@ h4 {
   margin-top: 24px;
   margin-bottom: 24px;
   width: 90%;
+  margin-left: 60px;
 }

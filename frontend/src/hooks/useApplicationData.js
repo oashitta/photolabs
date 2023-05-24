@@ -7,6 +7,7 @@ const initialState = {
   clickedPhoto: null,
   topic: undefined,
   photos: [],
+  topics: [],
 };
 
 export const ACTIONS = {
@@ -16,10 +17,16 @@ export const ACTIONS = {
   CLICKED_PHOTO: "CLICKED_PHOTO",
   PHOTOS_BY_TOPIC: "PHOTOS_BY_TOPIC",
   SET_PHOTOS: "SET_PHOTOS",
+  SET_TOPICS: "SET_TOPICS",
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    case ACTIONS.SET_TOPICS:
+      return {
+        ...state,
+        topics: action.payload,
+      };
     case ACTIONS.SET_PHOTOS:
       return {
         ...state,
@@ -78,6 +85,15 @@ const useApplicationData = () => {
       });
   }, []);
 
+  useEffect(() => {
+    fetch("http://localhost:8001/api/topics")
+      .then((res) => res.json())
+      .then((data) => {
+        // setTopics([...data]);
+        dispatch({ type: ACTIONS.SET_TOPICS, payload: [...data] });
+      });
+  }, []);
+
   const toggleFavorite = (photoId) => {
     dispatch({ type: ACTIONS.TOGGLE_FAVORITE, payload: { photoId } });
   };
@@ -112,6 +128,7 @@ const useApplicationData = () => {
     closeModal,
     getPhotosByTopic,
     photos: state.photos,
+    topics: state.topics,
   };
 };
 
